@@ -1,7 +1,40 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Fruit Juice Tycoon: Refreshed", "Ocean")
 local Tab = Window:NewTab("Teleport")
+local TP = Window:NewTab("Teleport")
 local Section = Tab:NewSection("Obby")
+local TP = TP:NewSection("Teleport To Players")
+Plr = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Plr,v.Name) 
+end
+local drop = Section:NewDropdown("Select Player!", "Click To Select", Plr, function(t)
+   PlayerTP = t
+end)
+Section:NewButton("Click To TP", "", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
+end)
+Section:NewToggle("Auto Tp", "", function(t)
+_G.TPPlayer = t
+while _G.TPPlayer do wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
+end
+end)
+
+Section:NewButton("Refresh Players","Refresh Players", function()
+  drop:Refresh(Plr)
+end)
+
+local Tab = Window:NewTab("Speed and Jump")
+local S1 = Tab:NewSection("Speed and Jump")
+
+S1:NewSlider("Speed", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+S1:NewSlider("Jump", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
 
 
 Section:NewButton("Claim", "ButtonInfo", function()
