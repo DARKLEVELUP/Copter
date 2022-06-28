@@ -1,27 +1,27 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Fruit Juice Tycoon: Refreshed", "Ocean")
-local Tab = Window:NewTab("Teleport")
-local TP = Window:NewTab("Teleport")
+local Tab = Window:NewTab("OBBY")
+local TP = Window:NewTab("TELEPORT")
 local Section = Tab:NewSection("Obby")
 local TP = TP:NewSection("Teleport To Players")
 Plr = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
     table.insert(Plr,v.Name) 
 end
-local drop = Section:NewDropdown("Select Player!", "Click To Select", Plr, function(t)
+local drop = TP:NewDropdown("Select Player!", "Click To Select", Plr, function(t)
    PlayerTP = t
 end)
-Section:NewButton("Click To TP", "", function()
+TP:NewButton("Click To TP", "", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
 end)
-Section:NewToggle("Auto Tp", "", function(t)
+TP:NewToggle("Auto Tp", "", function(t)
 _G.TPPlayer = t
 while _G.TPPlayer do wait()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[PlayerTP].Character.HumanoidRootPart.CFrame
 end
 end)
 
-Section:NewButton("Refresh Players","Refresh Players", function()
+TP:NewButton("Refresh Players","Refresh Players", function()
   drop:Refresh(Plr)
 end)
 
